@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Thaththa! 🎂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #1cc584 0%, #1a7fb9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sparkles Background */
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 100%;
+            animation: twinkle 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Gift Box */
+        .gift-box-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gift-box-container:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box {
+            width: 50;
+            height: 50;
+            background: linear-gradient(180deg, #e74488 0%, #B0E0E6 100%);
+            border: 4px solid #000;
+            border-radius: 10px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .gift-lid {
+            width: 220px;
+            height: 40px;
+            background: linear-gradient(180deg, #ff006a 0%, #e2f1f3 100%);
+            border: 4px solid #000;
+            border-radius: 10px;
+            position: absolute;
+            top: -20px;
+            left: -14px;
+        }
+
+        .ribbon {
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ribbon::before,
+        .ribbon::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: #af055a;
+            border: 3px solid #000;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .ribbon::before {
+            left: 0;
+            transform: rotate(-20deg);
+        }
+
+        .ribbon::after {
+            right: 0;
+            transform: rotate(20deg);
+        }
+
+        .ribbon-center {
+            width: 25px;
+            height: 25px;
+            background: #FF6B6B;
+            border: 3px solid #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ribbon-vertical {
+            width: 50px;
+            height: 4px;
+            background: #FF6B6B;
+            border: 2px solid #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ribbon-horizontal {
+            width: 4px;
+            height: 150px;
+            background: #FF6B6B;
+            border: 2px solid #000;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .click-text {
+            margin-top: 30px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #010753;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Character and Cake */
+        .surprise-content {
+            display: none;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .character {
+            width: 150px;
+            height: 180px;
+            position: relative;
+            margin: 0 auto 20px;
+            animation: popUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes popUp {
+            0% { transform: translateY(100px) scale(0); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .character-head {
+            width: 80px;
+            height: 80px;
+            background: #FFE4C4;
+            border: 3px solid #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .character-hair {
+            width: 90px;
+            height: 40px;
+            background: #D2B48C;
+            border: 3px solid #000;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .character-eyes {
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .eye {
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .character-smile {
+            width: 30px;
+            height: 15px;
+            border: 3px solid #000;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .character-body {
+            width: 60px;
+            height: 80px;
+            background: #90EE90;
+            border: 3px solid #000;
+            border-radius: 30px 30px 10px 10px;
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .polka-dots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .character-arms {
+            position: absolute;
+            top: 85px;
+            width: 100%;
+        }
+
+        .arm {
+            width: 30px;
+            height: 8px;
+            background: #FFE4C4;
+            border: 3px solid #000;
+            border-radius: 10px;
+            position: absolute;
+        }
+
+        .arm-left {
+            left: 10px;
+            transform: rotate(-30deg);
+        }
+
+        .arm-right {
+            right: 10px;
+            transform: rotate(30deg);
+        }
+
+        /* Birthday Cake */
+        .cake-container {
+    /* Margin Top එක තබා ගනිමු, නමුත් පහළින් ඇති margin එක ඉවත් කරමු */
+    margin-top: -30px;
+    margin-bottom: 0px; /* නව රූපය නිසා මෙම අගය 0 කරමු */
+    animation: slideUp 1s 0.5s both;
+}
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .cake {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .cake-layer {
+            width: 100%;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+            border: 4px solid #000;
+            border-radius: 10px;
+            position: absolute;
+        }
+
+        .cake-layer-1 {
+            height: 60px;
+            bottom: 0;
+            width: 200px;
+        }
+
+        .cake-layer-2 {
+            height: 60px;
+            bottom: 55px;
+            width: 160px;
+            left: 20px;
+        }
+
+        .cake-layer-3 {
+            height: 60px;
+            bottom: 110px;
+            width: 120px;
+            left: 40px;
+        }
+
+        .cake-dots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+        }
+
+        .cake-ribbon {
+            width: 100%;
+            height: 15px;
+            background: #FF6B6B;
+            border: 3px solid #000;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        .bow {
+            width: 60px;
+            height: 40px;
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bow::before,
+        .bow::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 30px;
+            background: #FF6B6B;
+            border: 3px solid #000;
+            border-radius: 10px;
+        }
+
+        .bow::before {
+            left: 0;
+            transform: skewY(-10deg);
+        }
+
+        .bow::after {
+            right: 0;
+            transform: skewY(10deg);
+        }
+
+        .bow-center {
+            width: 15px;
+            height: 15px;
+            background: #FF6B6B;
+            border: 3px solid #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .candles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+        }
+
+        .candle {
+            width: 8px;
+            height: 35px;
+            border: 2px solid #000;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .candle:nth-child(1) { background: #FFB6C1; }
+        .candle:nth-child(2) { background: #FFFF99; }
+        .candle:nth-child(3) { background: #FFB6C1; }
+
+        .flame {
+            width: 12px;
+            height: 18px;
+            background: #FFD700;
+            border-radius: 50% 50% 0 50%;
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            from { transform: translateX(-50%) scale(1); }
+            to { transform: translateX(-50%) scale(1.1); }
+        }
+
+        .cake-text {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FF1493;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-top: 5px;
+            animation: rainbow 3s infinite;
+        }
+
+        @keyframes rainbow {
+            0%, 100% { color: #FF1493; }
+            25% { color: #FF6B6B; }
+            50% { color: #4ECDC4; }
+            75% { color: #FFD93D; }
+        }
+
+        /* Side Buttons */
+        .side-button {
+    position: fixed;
+    top: 40px;       /* 🔥 Button එක top side එකට ගියා */
+    transform: none; /* 🔥 translateY remove */
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 4px solid #000;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 100;
+    box-shadow: 0 8px 0 rgba(0,0,0,0.3);
+}
+
+
+        .side-button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 12px 0 rgba(0,0,0,0.3);
+        }
+
+        .side-button:active {
+            transform: translateY(-50%) scale(0.95);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+        }
+
+        .view-memory-btn {
+            right: 20px;
+            background: linear-gradient(135deg, #042de4 0%, #f10cf1 100%);
+            color: white;
+        }
+
+        .get-balloons-btn {
+            left: 20px;
+            background: linear-gradient(135deg, #f80289 0%, #3afaf0 100%);
+            color: white;
+        }
+
+        /* Memory Gallery */
+        .memory-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .gallery-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .gallery-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 3px solid #fff;
+            border-radius: 30px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 5px solid #fff;
+    border-radius: 15px;
+    /* 🔴 මෙම Styles දැන් ඉවත් කරන්න, මොකද Images යොදන්නේ */
+    /* display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 48px; 
+    color: white; */ 
+    
+    position: relative;
+    overflow: hidden;
+    animation: fadeInPhoto 0.5s;
+}
+
+        .photo-item::before {
+            content: 'Photo ' attr(data-number);
+            position: absolute;
+            font-size: 16px;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        @keyframes fadeInPhoto {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Balloons */
+       .balloon {
+    position: fixed;
+    width: 100px;
+    height: 120px;
+    animation: floatUp 6s ease-in forwards;
+    z-index: 999;
+    background-size: cover;
+    background-position: center;
+}
+
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 100px;
+            background: #333;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) ;
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) ;
+                
+            }
+        }
+
+        /* Audio Control */
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.9);
+            border: 3px solid #000;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        /* Upload Instructions */
+        .upload-instructions {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 15px;
+            max-width: 300px;
+            font-size: 14px;
+            z-index: 100;
+        }
+
+        .upload-label {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #4ECDC4;
+            border: 2px solid #000;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .upload-label:hover {
+            background: #45B7AA;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sparkles -->
+    <script>
+        for(let i = 0; i < 30; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(sparkle);
+        }
+    </script>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source id="audioSource" src="media/birthday_song.mp3" type="audio/mpeg">
+    </audio>
+
+    
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <!-- Gift Box -->
+        <div class="gift-box-container" id="giftBox">
+    <img src="media/mediagift_box.png" alt="Gift Box Image" class="gift-image">
+</div>
+        <div class="click-text">Click Here! 🎁</div>
+
+        <!-- Surprise Content -->
+        <div class="surprise-content" id="surpriseContent">
+            <!-- Character -->
+            <img src="media/mediagirl_surprise.png" alt="Surprise Girl" class="surprise-girl-image">
+
+            <!-- Birthday Cake -->
+            <div class="cake-container" id="newCakeImage">
+</div>
+<div class="cake-text" style="font-size: 32px; font-weight: bold; color: #FF1493; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: rainbow 3s infinite; margin-top: -10px;">
+    We Love You Thaththa! ❤️
+</div>
+<div class="cake-text" style="font-size: 24px; margin-top: 10px; color: #93ff06; animation: pulse 1.5s infinite;">
+    56 Years Young! 🎉
+</div>
+        </div>
+    </div>
+    
+
+    <!-- Side Buttons -->
+    <button class="side-button view-memory-btn" id="viewMemoryBtn">View Memory 📸</button>
+    <button class="side-button get-balloons-btn" id="getBalloonsBtn">Get Balloons 🎈</button>
+
+    <!-- Memory Gallery -->
+    <div class="memory-gallery" id="memoryGallery">
+        <div class="gallery-header">
+            <h1 class="gallery-title">✨ Beautiful Memories ✨</h1>
+            <button class="back-btn" id="backBtn">← Back</button>
+        </div>
+        <div class="photo-grid" id="photoGrid">
+            <!-- 12 Photo Placeholders -->
+        </div>
+    </div>
+
+    <script>
+
+        // Gift Box Click
+        const giftBox = document.getElementById('giftBox');
+        const surpriseContent = document.getElementById('surpriseContent');
+
+        giftBox.addEventListener('click', function() {
+            giftBox.style.animation = 'none';
+            giftBox.style.transform = 'scale(0)';
+            giftBox.style.opacity = '0';
+            giftBox.style.transition = 'all 0.8s';
+            
+            setTimeout(() => {
+                giftBox.style.display = 'none';
+                document.querySelector('.click-text').style.display = 'none';
+                surpriseContent.style.display = 'block';
+                
+                // Play music
+                bgMusic.play().catch(err => {
+                    console.log('Audio play failed:', err);
+                });
+            }, 800);
+        });
+
+        
+
+        // Create Photo Grid
+        // Create Photo Grid - දැන් සැබෑ Images භාවිත කරමු
+const photoGrid = document.getElementById('photoGrid');
+// ඔබගේ මතක ඡායාරූප 12 ක මාවත් මෙහි සකස් කරන්න.
+const photoPaths = [
+    'media/mediamemory_1.jpg',
+    'media/mediamemory_2.jpg',
+    'media/mediamemory_3.jpg',
+    'media/mediamemory_4.jpg',
+    'media/mediamemory_5.jpg',
+    'media/mediamemory_6.jpg',
+    'media/mediamemory_7.jpg',
+    'media/mediamemory_8.jpg',
+    'media/mediamemory_9.jpg',
+    'media/mediamemory_10.jpg',
+    'media/mediamemory_11.jpg',
+    'media/mediamemory_12.jpg'
+];
+
+for (let i = 0; i < photoPaths.length; i++) {
+    const photoItem = document.createElement('div');
+    photoItem.className = 'photo-item';
+    photoItem.setAttribute('data-number', i + 1);
+    
+    // 🔴 Image Tag එක නිර්මාණය කර photoItem එක තුළට ඇතුළු කිරීම
+    const img = document.createElement('img');
+    img.src = photoPaths[i];
+    img.alt = 'Thaththa Memory ' + (i + 1);
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover'; // රූපය, එහි කොටස තුළ සම්පූර්ණයෙන් පෙන්වීමට
+    img.style.borderRadius = '10px';
+    
+    photoItem.appendChild(img);
+    
+    photoItem.style.animationDelay = (i * 0.1) + 's';
+    photoGrid.appendChild(photoItem);
+}
+
+        // View Memory Button
+        const viewMemoryBtn = document.getElementById('viewMemoryBtn');
+        const memoryGallery = document.getElementById('memoryGallery');
+        const backBtn = document.getElementById('backBtn');
+
+        viewMemoryBtn.addEventListener('click', function() {
+            memoryGallery.style.display = 'block';
+            document.getElementById('mainContainer').style.display = 'none';
+        });
+
+        backBtn.addEventListener('click', function() {
+            memoryGallery.style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'flex';
+        });
+
+        // Get Balloons Button
+        const getBalloonsBtn = document.getElementById('getBalloonsBtn');
+        const balloonColors = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#95E1D3', '#F38181', '#AA96DA'];
+
+        getBalloonsBtn.addEventListener('click', function() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.style.backgroundImage = "url('media/mediaheart_balloon.png')";
+                    balloon.style.left = Math.random() * 100 + '%';
+                    balloon.style.bottom = '-100px';
+                    balloon.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(balloon);
+
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, 6000);
+                }, i * 100);
+            }
+        });
+    </script>
+</body>
+</html>

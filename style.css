@@ -1,0 +1,198 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    background-color: #f0f4ff; /* ලා නිල් පසුබිම */
+}
+
+/* Page Transitions */
+.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f4ff;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Start Page Styling */
+#start-page {
+    position: relative; 
+    overflow: hidden; 
+    background-color: #e6e6fa; /* Lavander */
+}
+
+/* 🎁 Gift Box Base (CSS මගින් නිර්මාණය කරයි) */
+.gift-base {
+    width: 250px;
+    height: 150px;
+    background-color: #a0c4ff; 
+    border: 5px solid #4169e1;
+    border-top: none;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 30%; 
+    z-index: 1; 
+}
+
+/* 👧 දැරියගේ Image එක (Animation සඳහා) */
+.girl-surprise {
+    width: 200px;
+    position: absolute;
+    bottom: 25%; 
+    z-index: 2; 
+    /* 🔴 දැරිය මුලින් පහළට සඟවන ප්‍රධානම කොටස */
+    transform: translateY(100%); 
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth Bounce effect එකක් සඳහා */
+}
+
+/* Animation පටන් ගත් පසු (JS මගින් මෙම Class එක ඉවත් කරයි) */
+.girl-surprise.show {
+    transform: translateY(0); 
+}
+
+/* 뚜껑 (Cover) */
+#gift-cover {
+    width: 300px;
+    position: absolute;
+    bottom: 50%;
+    z-index: 3; 
+    transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s; 
+}
+
+/* 뚜껑 ඉවත් කිරීමේ Animation */
+#gift-cover.lifted {
+    transform: translateY(-400px) rotate(10deg); 
+    opacity: 0; 
+}
+
+/* බොත්තම */
+#click-surprise-btn {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: #ff6347; 
+    color: white;
+    border: none;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 20%;
+    z-index: 4;
+    box-shadow: 0 4px 10px rgba(255, 99, 71, 0.5);
+    transition: background-color 0.3s;
+}
+#click-surprise-btn:hover {
+    background-color: #e55337;
+}
+
+/* Main Page Styling */
+#main-page {
+    justify-content: space-around; 
+    padding: 20px;
+    background-color: #f0f4ff;
+}
+
+.girl-surprise-main {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.header-buttons {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-buttons button, #back-btn {
+    padding: 10px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 50px; 
+    border: 2px solid #4169e1;
+    background-color: #4169e1; 
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+.header-buttons button:hover, #back-btn:hover {
+    background-color: white;
+    color: #4169e1;
+}
+
+/* Memory Page Styling */
+#memory-page {
+    padding: 80px 20px 20px; 
+    justify-content: flex-start;
+}
+
+#back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+    overflow-y: auto; 
+    padding-bottom: 20px;
+}
+
+.photo-gallery img {
+    width: 100%;
+    height: 200px; 
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.photo-gallery img:hover {
+    transform: scale(1.03);
+}
+
+/* 🎈 Balloon Animation Styles 🎈 */
+#balloon-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none; 
+}
+
+.balloon {
+    position: absolute;
+    bottom: -100px; 
+    width: 80px; 
+    height: 80px;
+    opacity: 0.9;
+    animation: move-up linear infinite;
+}
+
+@keyframes move-up {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+    }
+}
